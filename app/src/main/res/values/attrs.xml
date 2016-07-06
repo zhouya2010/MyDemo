@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="myTitleText" format="string" />
+    <attr name="myTitleTextColor" format="color" />
+    <attr name="myTitleTextSize" format="dimension" />
+    <attr name="image" format="reference" />
+
+
+    <declare-styleable name="CustomTitleView">
+        <attr name="myTitleText" />
+        <attr name="myTitleTextColor" />
+        <attr name="myTitleTextSize" />
+    </declare-styleable>
+
+    <attr name="firstColor" format="color" />
+    <attr name="secondColor" format="color" />
+    <attr name="circleWidth" format="dimension" />
+    <attr name="speed" format="integer" />
+
+    <declare-styleable name="CustomProgressBar">
+        <attr name="firstColor" />
+        <attr name="secondColor" />
+        <attr name="circleWidth" />
+        <attr name="speed" />
+    </declare-styleable>
+
+    <declare-styleable name="PieChart">
+        <attr name="showText2" format="boolean"/>
+        <attr name="labelPosition" format="enum">
+            <enum name="right" value="0"/>
+            <enum name="left" value="1"/>
+        </attr>
+    </declare-styleable>
+    
+    <declare-styleable name="WritingBoardView">
+        <attr name="boardBackground" format="color"/>
+        <attr name="paintColor" format="color"/>
+        <attr name="paintWidth" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="CustomImageView">
+        <attr name="titleText" format="string"/>
+        <attr name="titleTextSize" format="dimension"/>
+        <attr name="titleTextColor" />
+        <attr name="image" />
+        <attr name="imageScaleType" format="enum">
+            <enum name="fillXY" value="0" />
+            <enum name="center" value="1" />
+        </attr>
+    </declare-styleable>
+
+    //自定义属性名,定义公共属性
+    <attr name="titleSize" format="dimension"></attr>
+    <attr name="titleColor" format="color"></attr>
+    <attr name="outCircleColor" format="color"></attr>
+    <attr name="inCircleColor" format="color"></attr>
+    <attr name="lineColor" format="color"></attr>
+    //自定义View的属性
+    <declare-styleable name="MyQQHealthView">
+        <attr name="titleColor"></attr>
+        <attr name="lineColor"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="ArcView">
+        <attr name="arcColor" format="color"></attr>
+        <attr name="textSize" format="dimension"></attr>
+        <attr name="textColor" format="color"></attr>
+        <attr name="lineColor"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MyWaveView">
+        <attr name="inCircleColor"/>
+        <attr name="initialRadius" format="float"/>
+        <attr name="maxRadius" format="float"/>
+        <attr name="waveDuration" format="integer"/>
+        <attr name="waveSpeed" format="integer"/>
+    </declare-styleable>
+
+</resources>

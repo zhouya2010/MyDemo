@@ -1,0 +1,87 @@
+//        DownloadTask task = new DownloadTask();
+//        task.setId("0");
+//        task.setSaveDirPath(SAVE_DIRECTRY);
+//        task.setFileName(FILE_NAME);
+//        task.setUrl(DOWNLOAD_URI);
+//        downloadManager.addDownloadTask(task, new DownloadTaskListener() {
+//            @Override
+//            public void onPrepare(DownloadTask downloadTask) {
+//                Log.d("DownLoadActivity", "onPrepare");
+//            }
+//
+//            @Override
+//            public void onStart(DownloadTask downloadTask) {
+//                Log.d("DownLoadActivity", "onStart");
+//                handler.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Log.d("DownLoadActivity", "onStarted");
+//                        download_info.setVisibility(View.VISIBLE);
+//                        download_img.setVisibility(View.VISIBLE);
+//                        animationDrawable.start();
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onDownloading(final DownloadTask downloadTask) {
+//                handler.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        download_info.setText((int) downloadTask.getPercent() + "%       ");
+//                        if (downloadTask.getPercent() == 100) {
+//                            download_info.setVisibility(View.INVISIBLE);
+//                            download_img.setVisibility(View.INVISIBLE);
+//                            animationDrawable.stop();
+//                            Intent intent = new Intent();
+//                            intent.setAction(Msg_INSTALL);
+//                            sendBroadcast(intent);
+//                            Toast.makeText(MainActivity.this, "Download Sucessful!", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onPause(DownloadTask downloadTask) {
+//                Log.d("DownLoadActivity", "onPause");
+//            }
+//
+//            @Override
+//            public void onCancel(DownloadTask downloadTask) {
+//                Log.d("DownLoadActivity", "onCancel");
+//            }
+//
+//            @Override
+//            public void onCompleted(DownloadTask downloadTask) {
+//                Log.d("DownLoadActivity", "onCompleted");
+////                handler.post(new Runnable() {
+////                    @Override
+////                    public void run() {
+////                        download_info.setVisibility(View.INVISIBLE);
+////                        download_img.setVisibility(View.INVISIBLE);
+////                        animationDrawable.stop();
+////                        Intent intent = new Intent();
+////                        intent.setAction(Msg_INSTALL);
+////                        sendBroadcast(intent);
+////                        Toast.makeText(MainActivity.this, "Download Sucessful!", Toast.LENGTH_SHORT).show();
+////                    }
+////                });
+//            }
+//
+//            @Override
+//            public void onError(DownloadTask downloadTask, int errorCode) {
+//                Log.d("DownLoadActivity", "onError");
+//                handler.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+////                        download_info.setVisibility(View.INVISIBLE);
+//                        download_img.setVisibility(View.INVISIBLE);
+//                        download_info.setText("Update error!");
+//                        animationDrawable.stop();
+//                        Toast.makeText(MainActivity.this, "Download error!", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+//            }
+//        });

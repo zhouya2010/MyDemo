@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">MyDemo</string>
+    <string name="contact_btn">获取联系人并拨打电话</string>
+    <string name="video_btn">播放视频</string>
+    <string name="my_view_btn">自定义View</string>
+    <string name="data_base_btn">greenDao</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="never">&quot;Never&quot;</string>
+    <string name="every_day">&quot;Every Day&quot;</string>
+    <string name="day_concat">&quot;, &quot;</string>
+    <string name="creat_database">&quot;添加数据&quot;</string>
+    <string name="query_data">&quot;查看数据&quot;</string>
+    <string name="download_data">下载文件</string>
+    <string name="wifi">wifi</string>
+    <string name="leancloud">leancloud</string>
+</resources>
