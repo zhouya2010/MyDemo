@@ -42,6 +42,7 @@
         <activity android:name=".database.SprayActivity"/>
         <activity android:name=".download.DownLoadActivity"/>
         <activity android:name=".wifi.WifiSettings"/>
+        <activity android:name=".mvc.CountActivity"/>
     </application>
 
 </manifest>
