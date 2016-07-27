@@ -43,6 +43,7 @@
         <activity android:name=".download.DownLoadActivity"/>
         <activity android:name=".wifi.WifiSettings"/>
         <activity android:name=".mvc.CountActivity"/>
+        <activity android:name=".mvp.NumActivity"/>
     </application>
 
 </manifest>

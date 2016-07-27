@@ -20,7 +20,7 @@ import org.xutils.view.annotation.ViewInject;
 import app.example.com.mydemo.contact.ContactListActivity;
 import app.example.com.mydemo.database.SprayActivity;
 import app.example.com.mydemo.download.DownLoadActivity;
-import app.example.com.mydemo.mvc.CountActivity;
+import app.example.com.mydemo.mvp.NumActivity;
 import app.example.com.mydemo.myview.MyView;
 import app.example.com.mydemo.video.VideoDemo;
 import app.example.com.mydemo.wifi.WifiSettings;
@@ -106,7 +106,7 @@ public class MainActivity extends BaseActivity {
                 break;
 
             case R.id.mvc_test_btn:
-                intent = new Intent(this, CountActivity.class);
+                intent = new Intent(this, NumActivity.class);
                 break;
 
             default:
