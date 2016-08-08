@@ -14,4 +14,5 @@
     <string name="download_data">下载文件</string>
     <string name="wifi">wifi</string>
     <string name="leancloud">leancloud</string>
+    <string name="ipc">IPC Test</string>
 </resources>

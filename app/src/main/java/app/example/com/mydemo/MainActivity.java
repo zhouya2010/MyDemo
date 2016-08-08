@@ -20,6 +20,7 @@ import org.xutils.view.annotation.ViewInject;
 import app.example.com.mydemo.contact.ContactListActivity;
 import app.example.com.mydemo.database.SprayActivity;
 import app.example.com.mydemo.download.DownLoadActivity;
+import app.example.com.mydemo.ipc.FirstActivity;
 import app.example.com.mydemo.myview.MyView;
 import app.example.com.mydemo.video.VideoDemo;
 import app.example.com.mydemo.wifi.WifiSettings;
@@ -70,7 +71,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @Event(value = {R.id.contact_btn,R.id.my_view_btn,R.id.video_btn,R.id.data_base_btn, R.id.download_btn, R.id.wifi_btn})
+    @Event(value = {R.id.contact_btn,R.id.my_view_btn,R.id.video_btn,R.id.data_base_btn, R.id.download_btn, R.id.wifi_btn, R.id.ipc_btn})
     private void click(View v){
         Intent intent = null;
         switch (v.getId()) {
@@ -104,6 +105,10 @@ public class MainActivity extends BaseActivity {
                 intent = new Intent(this, WifiSettings.class);
                 break;
 
+            case R.id.ipc_btn:
+                Toast.makeText(this, "ipc", Toast.LENGTH_SHORT).show();
+                intent = new Intent(this, FirstActivity.class);
+                break;
             default:
                 break;
         }
