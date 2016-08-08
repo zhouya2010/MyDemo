@@ -15,4 +15,6 @@
     <string name="wifi">wifi</string>
     <string name="leancloud">leancloud</string>
     <string name="mvc_test">MVC Test</string>
+    <string name="ipc_test">IPC Test</string>
+
 </resources>

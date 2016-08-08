@@ -65,5 +65,12 @@
         android:layout_below="@id/wifi_btn"
         android:text="@string/mvc_test"/>
 
+    <Button
+        android:id="@+id/ipc_test_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mvc_test_btn"
+        android:text="@string/ipc_test"/>
+
 
 </RelativeLayout>

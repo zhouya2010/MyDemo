@@ -44,6 +44,8 @@
         <activity android:name=".wifi.WifiSettings"/>
         <activity android:name=".mvc.CountActivity"/>
         <activity android:name=".mvp.NumActivity"/>
+        <activity android:name=".ipc.FirstActivity"/>
+        <service android:name=".ipc.RemoteService" android:process=":RmoteService"/>
     </application>
 
 </manifest>
