@@ -59,11 +59,11 @@
         android:text="@string/leancloud"/>
 
     <Button
-        android:id="@+id/ipc_btn"
+        android:id="@+id/mvc_test_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/leancloud_btn"
-        android:text="@string/ipc"/>
+        android:layout_below="@id/wifi_btn"
+        android:text="@string/mvc_test"/>
 
 
 </RelativeLayout>
