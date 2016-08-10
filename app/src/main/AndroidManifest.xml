@@ -46,6 +46,7 @@
         <activity android:name=".mvp.NumActivity"/>
         <activity android:name=".ipc.FirstActivity"/>
         <service android:name=".ipc.RemoteService" android:process=":RmoteService"/>
+        <service android:name=".ipc.BookManagerService" android:process=":BookRemoteService"/>
     </application>
 
 </manifest>

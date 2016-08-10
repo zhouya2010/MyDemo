@@ -10,14 +10,16 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+
+import java.util.List;
 
 import app.example.com.mydemo.BaseActivity;
 import app.example.com.mydemo.R;
@@ -35,43 +37,76 @@ public class FirstActivity extends BaseActivity {
 
     private Messenger mService;
     private boolean isBinding = false;
+    IBookManager bookManager;
+
+    IOnNewBookArrivedListener mOnNewBookArrivedListener;
 
     private ServiceConnection mConnection = new ServiceConnection() {
 
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            mService = new Messenger(service);
-            isBinding = true;
+//            mService = new Messenger(service);
+//            isBinding = true;
+
+            bookManager =  IBookManager.Stub.asInterface(service);
+            try {
+                List<Book> books = bookManager.getBookList();
+                Toast.makeText(FirstActivity.this, "onServiceConnected--->" + books.size(), Toast.LENGTH_SHORT).show();
+                for(Book book:books) {
+                    Log.e("FirstActivity", "bookName -->" + book.bookName);
+                }
+
+                bookManager.addBook(new Book(4, "Android"));
+
+                books = bookManager.getBookList();
+
+                for(Book book:books) {
+                    Log.e("FirstActivity", "bookName2 -->" + book.bookName);
+                }
+
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            mService = null;
-            isBinding = false;
+//            mService = null;
+//            isBinding = false;
+            bookManager = null;
+            Log.e("FirstActivity", "onServiceDisconnected");
         }
     };
+
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        bindService(new Intent(this, RemoteService.class), mConnection,BIND_AUTO_CREATE);
+        bindService(new Intent(this, BookManagerService.class), mConnection,BIND_AUTO_CREATE);
+    }
+
+    @Override
+    protected void onPause() {
+        Log.e("FirstActivity", "onPause");
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.e("FirstActivity", "onDestroy");
+        unbindService(mConnection);
+        super.onDestroy();
     }
 
     @Event(value ={R.id.sent_message_btn})
-    private void click(View v) {
+    private void click(View v) throws RemoteException {
         switch (v.getId()) {
             case R.id.sent_message_btn:
-                Log.d("FirstActivity", "sent message");
-                //向进程B发一条消息，并接收来自进程B回复过来的消息
-                Message message = Message.obtain(null, RemoteService.GET_RESULT);
-                message.replyTo = mMessenger;
-                try {
-                    mService.send(message);
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
+                Log.e("FirstActivity", "sent message");
+                int n = bookManager.addBook(new Book(3,"IOS"));
+                Log.e("FirstActivity", "books num----->:" + n);
                 break;
         }
     }

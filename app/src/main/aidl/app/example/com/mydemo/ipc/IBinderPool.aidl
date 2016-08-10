@@ -1,0 +1,8 @@
+// IBinderPool.aidl
+package app.example.com.mydemo.ipc;
+
+// Declare any non-default types here with import statements
+
+interface IBinderPool {
+    IBinder queryBinder( int binderCode);
+}
