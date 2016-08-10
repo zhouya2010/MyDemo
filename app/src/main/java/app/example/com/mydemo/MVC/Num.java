@@ -1,4 +1,4 @@
-package app.example.com.mydemo.mvc;
+package app.example.com.mydemo.MVC;
 
 /**
  * Created by Administrator on 2016/7/25.
