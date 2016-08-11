@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<app.example.com.mydemo.myview.TouchEventFather
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#468AD7"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <app.example.com.mydemo.myview.TouchEventChilds
+        android:id="@+id/childs"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:background="#E1110D"
+        android:orientation="horizontal"
+        android:text="@string/hello_world">
+
+        <app.example.com.mydemo.myview.MyTextView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:background="@color/black" />
+
+    </app.example.com.mydemo.myview.TouchEventChilds>
+
+</app.example.com.mydemo.myview.TouchEventFather>

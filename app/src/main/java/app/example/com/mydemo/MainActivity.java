@@ -22,7 +22,7 @@ import app.example.com.mydemo.database.SprayActivity;
 import app.example.com.mydemo.download.DownLoadActivity;
 import app.example.com.mydemo.ipc.FirstActivity;
 import app.example.com.mydemo.mvp.NumActivity;
-import app.example.com.mydemo.myview.MyView;
+import app.example.com.mydemo.myview.TouchEventActivity;
 import app.example.com.mydemo.video.VideoDemo;
 import app.example.com.mydemo.wifi.WifiSettings;
 
@@ -88,7 +88,7 @@ public class MainActivity extends BaseActivity {
 
             case R.id.my_view_btn:
                 Toast.makeText(this, "my_view", Toast.LENGTH_SHORT).show();
-                intent = new Intent(this, MyView.class);
+                intent = new Intent(this, TouchEventActivity.class);
                 break;
 
             case R.id.data_base_btn:
