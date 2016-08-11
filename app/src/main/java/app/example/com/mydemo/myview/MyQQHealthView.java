@@ -245,14 +245,14 @@ public class MyQQHealthView extends View {
         rectSize = widthBg / 12;
         rectAgHeight = widthBg / 10;
         //绘制虚线上的圆角竖线
-        for (int i = 0; i < MyView.sizes.size(); i++) {
+        for (int i = 0; i < MyViewActivity.sizes.size(); i++) {
             rectPaint.setStrokeWidth(widthBg / 25);
             rectPaint.setStyle(Paint.Style.STROKE);
             rectPaint.setStrokeJoin(Paint.Join.ROUND);
             rectPaint.setStrokeCap(Paint.Cap.ROUND);
             float startHeight = widthBg + 90 + rectAgHeight;
             rectPath.moveTo(rectSize, startHeight);
-            double percentage = Double.valueOf(MyView.sizes.get(i)) / Double.valueOf(averageSize);
+            double percentage = Double.valueOf(MyViewActivity.sizes.get(i)) / Double.valueOf(averageSize);
             double height = percentage * rectAgHeight;
             rectPath.lineTo(rectSize, (float) (startHeight - height));
             rectPaint.setColor(textColor);

@@ -250,4 +250,16 @@ public class ArcView extends View {
 
         return true;
     }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        Log.d("ArcView", "onDetachedFromWindow");
+        super.onDetachedFromWindow();
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        Log.d("ArcView", "onAttachedToWindow");
+        super.onAttachedToWindow();
+    }
 }

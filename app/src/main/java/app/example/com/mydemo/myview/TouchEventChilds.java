@@ -29,15 +29,15 @@ public class TouchEventChilds extends LinearLayout {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         Log.e("TouchEventFather", "TouchEventChilds | onInterceptTouchEvent --> " + TouchEventUtil.getTouchAction(ev.getAction()));
-//        return super.onInterceptTouchEvent(ev);
-        return true;
+        return super.onInterceptTouchEvent(ev);
+//        return true;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         Log.e("TouchEventFather", "TouchEventChilds | onTouchEvent --> " + TouchEventUtil.getTouchAction(ev.getAction()));
-//        return super.onTouchEvent(ev);
-        return false;
+        return super.onTouchEvent(ev);
+//        return false;
     }
 
     @Override

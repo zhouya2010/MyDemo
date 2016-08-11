@@ -37,7 +37,7 @@
 
         <activity android:name=".contact.ContactListActivity"/>
         <activity android:name=".video.VideoDemo"/>
-        <activity android:name=".myview.MyView"/>
+        <activity android:name=".myview.MyViewActivity"/>
         <activity android:name=".database.NoteActivity"/>
         <activity android:name=".database.SprayActivity"/>
         <activity android:name=".download.DownLoadActivity"/>

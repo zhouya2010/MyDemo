@@ -5,12 +5,14 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
+import android.widget.Scroller;
 
 /**
  * Created by Administrator on 2016/8/11.
  */
 
 public class TouchEventFather extends LinearLayout {
+
     public TouchEventFather(Context context) {
         super(context);
     }
@@ -23,14 +25,12 @@ public class TouchEventFather extends LinearLayout {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         Log.w("TouchEventFather", "TouchEventFather | dispatchTouchEvent --> " + TouchEventUtil.getTouchAction(ev.getAction()));
         return super.dispatchTouchEvent(ev);
-//        return false;
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         Log.w("TouchEventFather", "TouchEventFather | onInterceptTouchEvent --> " + TouchEventUtil.getTouchAction(ev.getAction()));
         return super.onInterceptTouchEvent(ev);
-//        return true;
     }
 
     @Override
@@ -39,4 +39,5 @@ public class TouchEventFather extends LinearLayout {
 //        return super.onTouchEvent(ev);
         return true;
     }
+
 }

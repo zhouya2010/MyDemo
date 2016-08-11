@@ -18,7 +18,7 @@ import app.example.com.mydemo.R;
  */
 
 @ContentView(R.layout.my_view)
-public class MyView extends BaseActivity {
+public class MyViewActivity extends BaseActivity {
 
     private MyQQHealthView view;
     public static List<Integer> sizes = new ArrayList<>();
@@ -27,7 +27,7 @@ public class MyView extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("MyView", "oncreat");
+        Log.d("MyViewActivity", "oncreat");
 //        ArcView arcView = (ArcView) findViewById(R.id.myArcView);
 //        arcView.setRankNum(3);
 //        arcView.setWalkNum(8888);
@@ -54,7 +54,7 @@ public class MyView extends BaseActivity {
 //            @Override
 //            public void onClick(View v) {
 //                view.reSet(6534, 8, 4567);
-//                Toast.makeText(MyView.this, "click", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MyViewActivity.this, "click", Toast.LENGTH_SHORT).show();
 //            }
 //        });
 //    }

@@ -13,4 +13,13 @@
         app:waveDuration="2000"
         app:initialRadius="10.0" />
 
+    <app.example.com.mydemo.myview.ArcView
+        android:id="@+id/arc_view"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/wave_view"
+        app:arcColor="@color/red"
+        app:textSize="16sp"
+        app:lineColor="@color/blue"/>
+
 </RelativeLayout>
