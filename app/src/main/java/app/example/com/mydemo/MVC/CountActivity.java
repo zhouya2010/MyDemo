@@ -1,4 +1,4 @@
-package app.example.com.mydemo.MVC;
+package app.example.com.mydemo.mvc;
 
 import android.os.Bundle;
 import android.view.View;
