@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="app.example.com.mydemo" >
-
+    package="app.example.com.mydemo">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -14,11 +13,10 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <!-- 读短信权限 -->
     <uses-permission android:name="android.permission.READ_SMS" />
-    <!--打电话-->
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <!-- 打电话 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <application
         android:name=".MyApplication"
@@ -26,29 +24,40 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity" >
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".contact.ContactListActivity" />
+        <activity android:name=".video.VideoDemo" />
+        <activity android:name=".myview.MyViewActivity" />
+        <activity android:name=".database.NoteActivity" />
+        <activity android:name=".database.SprayActivity" />
+        <activity android:name=".download.DownLoadActivity" />
+        <activity android:name=".wifi.WifiSettings" />
+        <activity android:name=".mvc.CountActivity" />
+        <activity android:name=".mvp.NumActivity" />
+        <activity android:name=".ipc.FirstActivity" />
+        <activity android:name=".myview.TouchEventActivity" />
 
-        <activity android:name=".contact.ContactListActivity"/>
-        <activity android:name=".video.VideoDemo"/>
-        <activity android:name=".myview.MyViewActivity"/>
-        <activity android:name=".database.NoteActivity"/>
-        <activity android:name=".database.SprayActivity"/>
-        <activity android:name=".download.DownLoadActivity"/>
-        <activity android:name=".wifi.WifiSettings"/>
-        <activity android:name=".mvc.CountActivity"/>
-        <activity android:name=".mvp.NumActivity"/>
-        <activity android:name=".ipc.FirstActivity"/>
-        <activity android:name=".myview.TouchEventActivity"/>
-        <service android:name=".ipc.RemoteService" android:process=":RmoteService"/>
-        <service android:name=".ipc.BookManagerService" android:process=":BookRemoteService"/>
+        <service
+            android:name=".ipc.RemoteService"
+            android:process=":RmoteService" />
+        <service
+            android:name=".ipc.BookManagerService"
+            android:process=":BookRemoteService" />
 
+        <activity
+            android:name=".CollapsingToolbar.ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity android:name=".bitmap.BitmapActivity"/>
+        <activity android:name=".bitmap.LargeImageViewActivity"/>
     </application>
 
 </manifest>

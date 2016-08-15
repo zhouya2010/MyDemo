@@ -80,7 +80,7 @@ public class ContactListAdapter extends BaseAdapter {
 					.findViewById(R.id.qcb);
 			holder.alpha = (TextView) convertView.findViewById(R.id.alpha);
 			holder.name = (TextView) convertView.findViewById(R.id.name);
-			holder.number = (TextView) convertView.findViewById(R.id.number);
+//			holder.number = (TextView) convertView.findViewById(R.id.number);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -90,7 +90,7 @@ public class ContactListAdapter extends BaseAdapter {
 		String name = contact.getDesplayName();
 		String number = contact.getPhoneNum();
 		holder.name.setText(name);
-		holder.number.setText(number);
+//		holder.number.setText(number);
 //		holder.quickContactBadge.assignContactUri(ContactsContract.Contacts.getLookupUri(
 //				contact.getContactId(), contact.getLookUpKey()));
 //		if (0 == contact.getPhotoId()) {

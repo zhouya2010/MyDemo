@@ -4,6 +4,9 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Interpolator;
 import android.widget.Scroller;
 import android.widget.TextView;
 
@@ -13,10 +16,10 @@ import android.widget.TextView;
 
 public class MyTextView extends TextView {
 
-    Scroller mScroller;
-
-    int lastX;
-    int lastY;
+    private Scroller mScroller;
+    private VelocityTracker vTracker = null;
+    private int lastX;
+    private int lastY;
 
     public MyTextView(Context context) {
         super(context);
@@ -24,7 +27,9 @@ public class MyTextView extends TextView {
 
     public MyTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mScroller = new Scroller(context);
+        Interpolator interpolator = new DecelerateInterpolator();
+        mScroller = new Scroller(context, interpolator);
+
 //        smoothScroller(300,300);
     }
 
@@ -33,12 +38,15 @@ public class MyTextView extends TextView {
         int scrollX = getScrollX();
         int scrollY = getScrollY();
 
+        int centerX =(getRight() - getLeft()) / 2;
+        int  centerY =(getBottom() - getTop()) / 2;
+
         Log.d("MyTextView", "scrollX==>" + scrollX + "    scrolly===> " + scrollY);
 
-        int dx = destX - scrollX;
-        int dy = destX - scrollY;
+        int dx = centerX - scrollX - destX;
+        int dy = centerY - destY - scrollY;
 
-        mScroller.startScroll(scrollX, scrollY, dx, dy, 1000);
+        mScroller.startScroll(scrollX, scrollY, dx, dy, 500);
 
         invalidate();
     }
@@ -57,15 +65,25 @@ public class MyTextView extends TextView {
             case MotionEvent.ACTION_DOWN:
                 lastX = x;
                 lastY = y;
+
+                if(vTracker == null) {
+                    vTracker = VelocityTracker.obtain();
+                }
+                else {
+                    vTracker.clear();
+                }
                 break;
             case MotionEvent.ACTION_MOVE:
                 int dx = x - lastX;
                 int dy = y - lastY;
 //                layout(getLeft() + dx, getTop() + dy, getRight() + dx, getBottom() + dy);
+                vTracker.addMovement(event);
+                vTracker.computeCurrentVelocity(100);
+                Log.d("MyTextView", "vTracker.getXVelocity():" + vTracker.getXVelocity());
+                Log.d("MyTextView", "vTracker.getYVelocity():" + vTracker.getYVelocity());
                 break;
             case MotionEvent.ACTION_UP:
                 smoothScroller(x,y);
-
                 break;
 
         }
@@ -86,4 +104,11 @@ public class MyTextView extends TextView {
     }
 
 
+    @Override
+    protected void onDetachedFromWindow() {
+        if(vTracker != null) {
+            vTracker.recycle();
+        }
+        super.onDetachedFromWindow();
+    }
 }

@@ -5,6 +5,7 @@ public class ContactBean {
 	private int contactId;
 	private String desplayName;
 	private String phoneNum;
+
 	private String sortKey;
 	private Long photoId;
 	private String lookUpKey;

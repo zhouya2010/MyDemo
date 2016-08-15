@@ -10,67 +10,92 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="app.example.com.mydemo.MainActivity">
 
-    <Button
-        android:id="@+id/contact_btn"
-        android:text="@string/contact_btn"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/video_btn"
-        android:text="@string/video_btn"
-        android:layout_width="match_parent"
-        android:layout_below="@id/contact_btn"
-        android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/my_view_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/video_btn"
-        android:text="@string/my_view_btn"/>
+            <Button
+                android:id="@+id/contact_btn"
+                android:text="@string/contact_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/data_base_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/my_view_btn"
-        android:text="@string/data_base_btn"/>
+            <Button
+                android:id="@+id/video_btn"
+                android:text="@string/video_btn"
+                android:layout_width="match_parent"
+                android:layout_below="@id/contact_btn"
+                android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/download_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/data_base_btn"
-        android:text="@string/download_data"/>
+            <Button
+                android:id="@+id/my_view_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/video_btn"
+                android:text="@string/my_view_btn"/>
 
-    <Button
-        android:id="@+id/wifi_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/download_btn"
-        android:text="@string/wifi"/>
+            <Button
+                android:id="@+id/data_base_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/my_view_btn"
+                android:text="@string/data_base_btn"/>
 
-    <Button
-        android:id="@+id/leancloud_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/wifi_btn"
-        android:text="@string/leancloud"/>
+            <Button
+                android:id="@+id/download_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/data_base_btn"
+                android:text="@string/download_data"/>
 
-    <Button
-        android:id="@+id/mvc_test_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/wifi_btn"
-        android:text="@string/mvc_test"/>
+            <Button
+                android:id="@+id/wifi_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/download_btn"
+                android:text="@string/wifi"/>
 
-    <Button
-        android:id="@+id/ipc_test_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/mvc_test_btn"
-        android:text="@string/ipc_test"/>
+            <Button
+                android:id="@+id/leancloud_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/wifi_btn"
+                android:text="@string/leancloud"/>
 
+            <Button
+                android:id="@+id/mvc_test_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/wifi_btn"
+                android:text="@string/mvc_test"/>
+
+            <Button
+                android:id="@+id/ipc_test_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mvc_test_btn"
+                android:text="@string/ipc_test"/>
+
+            <Button
+                android:id="@+id/collapsing_test_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ipc_test_btn"
+                android:text="@string/collapsing"/>
+
+            <Button
+                android:id="@+id/bitmap_test_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/collapsing_test_btn"
+                android:text="@string/bitmap_load"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

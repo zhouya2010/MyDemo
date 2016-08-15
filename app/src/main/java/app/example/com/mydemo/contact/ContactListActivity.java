@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -31,6 +32,9 @@ public class ContactListActivity extends BaseActivity {
 
     @ViewInject(R.id.contact_list)
     ListView contactList;
+
+    @ViewInject(R.id.contact_search_btn)
+    TextView contact_search_btn;
 
     private ContactListAdapter adapter;
     private List<ContactBean> list;

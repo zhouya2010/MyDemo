@@ -1,57 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:layout_height="wrap_content"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="app.example.com.mydemo.MainActivity">
 
-    <app.example.com.mydemo.contact.SlidingLinearLayout
-        android:id="@+id/slidingview"
+    <RelativeLayout
+        android:id="@+id/contact_search_linearlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true" >
+        android:orientation="horizontal"
+        android:background="@color/albumback"
+        android:layout_height="50dp">
 
-        <ListView
-            android:id="@+id/contact_list"
+        <ImageView
+        android:id="@+id/img1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+            android:visibility="invisible"
+        android:src="@mipmap/ic_launcher"/>
+
+        <ImageView
+            android:id="@+id/img2"
+            android:layout_toLeftOf="@id/img1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:src="@mipmap/ic_launcher"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/contact_search_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_search_black_24dp"/>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <app.example.com.mydemo.contact.SlidingLinearLayout
+            android:id="@+id/slidingview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:cacheColorHint="#000000"
-            android:divider="#00000000"
-            android:fadingEdge="none"
-            android:scrollbars="none"
-            android:scrollingCache="false"
-            android:visibility="visible" />
+            android:layout_alignParentTop="true" >
 
-    </app.example.com.mydemo.contact.SlidingLinearLayout>
+            <ListView
+                android:id="@+id/contact_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:cacheColorHint="#000000"
+                android:divider="#00000000"
+                android:fadingEdge="none"
+                android:scrollbars="none"
+                android:scrollingCache="false"
+                android:visibility="visible" />
 
-    <app.example.com.mydemo.contact.QuickAlphabeticBar
-        android:id="@+id/fast_scroller"
-        android:layout_width="22dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="top|right|center"
-        android:layout_marginTop="0dip"
-        android:background="@null"
-        android:scaleType="centerInside"
-        android:src="@drawable/dic_background" />
+        </app.example.com.mydemo.contact.SlidingLinearLayout>
 
-    <TextView
-        android:id="@+id/fast_position"
-        android:layout_width="70dip"
-        android:layout_height="70dip"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_margin="34dip"
-        android:background="@mipmap/sort_icon_bg_click"
-        android:gravity="center"
-        android:padding="2dip"
-        android:textColor="#404040"
-        android:textSize="48dip"
-        android:visibility="invisible" />
+        <app.example.com.mydemo.contact.QuickAlphabeticBar
+            android:id="@+id/fast_scroller"
+            android:layout_width="22dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="top|right|center"
+            android:layout_marginTop="0dip"
+            android:background="@null"
+            android:scaleType="centerInside"
+            android:src="@drawable/dic_background" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/fast_position"
+            android:layout_width="70dip"
+            android:layout_height="70dip"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_margin="34dip"
+            android:background="@mipmap/sort_icon_bg_click"
+            android:gravity="center"
+            android:padding="2dip"
+            android:textColor="#404040"
+            android:textSize="48dip"
+            android:visibility="invisible" />
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

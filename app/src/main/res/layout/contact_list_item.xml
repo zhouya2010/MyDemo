@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
+    android:background="@color/aliceblue"
     android:layout_height="wrap_content" >
 
     <!-- 首字母 -->
@@ -11,41 +12,60 @@
         android:layout_height="wrap_content"
         android:background="#333333"
         android:paddingLeft="10dip"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/black_overlay"
         android:visibility="gone" />
 
     <!-- 联系人信息 -->
 
-    <ImageView
-        android:id="@+id/qcb"
-        android:layout_width="75dip"
-        android:layout_height="75dip"
-        android:layout_alignParentLeft="true"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/alpha"
-        android:layout_marginBottom="3dip"
-        android:layout_marginTop="3dip"
-        android:src="@mipmap/touxiang" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="5.0dip"
-        android:layout_toRightOf="@+id/qcb"
-        android:singleLine="true"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:textColor="#FFFFFF" />
 
-    <TextView
-        android:id="@+id/number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="5.0dip"
-        android:layout_toRightOf="@+id/qcb"
-        android:singleLine="true"
-        android:textAppearance="?android:textAppearanceSmall"
-        android:textColor="#FFFFFF" />
+        <CheckBox
+            android:id="@+id/contact_select_checkbox"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/qcb"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/alpha"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="3dip"
+            android:layout_marginTop="3dip"
+            android:src="@mipmap/touxiang" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5.0dip"
+            android:layout_toRightOf="@+id/qcb"
+            android:singleLine="true"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/blackeight" />
+
+
+    </LinearLayout>
+
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/number"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginLeft="5.0dip"-->
+        <!--android:layout_toRightOf="@+id/qcb"-->
+        <!--android:singleLine="true"-->
+        <!--android:textAppearance="?android:textAppearanceSmall"-->
+        <!--android:textColor="#FFFFFF" />-->
 
 </RelativeLayout>

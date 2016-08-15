@@ -8,8 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style
-        name="DialogStyle">
+    <style name="DialogStyle">
         <item name="android:windowFrame">@null</item><!-- 该界面对应的前景图片 -->
         <item name="android:windowIsFloating">true</item><!-- 是否悬浮窗类型 -->
         <item name="android:windowIsTranslucent">true</item><!-- 是否透明 -->
@@ -25,5 +24,14 @@
         <item name="android:background">@drawable/flag_01</item>
         <item name="android:textColor">#ffffff</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
