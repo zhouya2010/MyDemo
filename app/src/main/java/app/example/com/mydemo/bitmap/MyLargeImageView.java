@@ -10,6 +10,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 /**
  * Created by Administrator on 2016/8/15.
  */
@@ -31,8 +34,7 @@ public class MyLargeImageView extends View {
 
     private static final BitmapFactory.Options options = new BitmapFactory.Options();
 
-    static
-    {
+    static {
         options.inPreferredConfig = Bitmap.Config.RGB_565;
     }
 
@@ -49,6 +51,29 @@ public class MyLargeImageView extends View {
         init();
     }
 
+    public void setInputStream(InputStream is) {
+        try {
+            mDecoder = BitmapRegionDecoder.newInstance(is, false);
+            BitmapFactory.Options tmpOptions = new BitmapFactory.Options();
+            // Grab the bounds for the scene dimensions
+            tmpOptions.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(is, null, tmpOptions);
+            mImageWidth = tmpOptions.outWidth;
+            mImageHeight = tmpOptions.outHeight;
+
+            requestLayout();
+            invalidate();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (is != null) is.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+
     public void init() {
 
         mDetector = new MoveGestureDetector(getContext(), new MoveGestureDetector.SimpleMoveGestureDetector() {
@@ -59,14 +84,12 @@ public class MyLargeImageView extends View {
                 int moveX = (int) detector.getMoveX();
                 int moveY = (int) detector.getMoveY();
 
-                if (mImageWidth > getWidth())
-                {
+                if (mImageWidth > getWidth()) {
                     mRect.offset(-moveX, 0);
                     checkWidth();
                     invalidate();
                 }
-                if (mImageHeight > getHeight())
-                {
+                if (mImageHeight > getHeight()) {
                     mRect.offset(0, -moveY);
                     checkHeight();
                     invalidate();
@@ -77,57 +100,67 @@ public class MyLargeImageView extends View {
         });
     }
 
-    private void checkWidth()
-    {
-
-
+    private void checkWidth() {
         Rect rect = mRect;
         int imageWidth = mImageWidth;
         int imageHeight = mImageHeight;
 
-        if (rect.right > imageWidth)
-        {
+        if (rect.right > imageWidth) {
             rect.right = imageWidth;
             rect.left = imageWidth - getWidth();
         }
 
-        if (rect.left < 0)
-        {
+        if (rect.left < 0) {
             rect.left = 0;
             rect.right = getWidth();
         }
     }
 
 
-    private void checkHeight()
-    {
+    private void checkHeight() {
 
         Rect rect = mRect;
         int imageWidth = mImageWidth;
         int imageHeight = mImageHeight;
 
-        if (rect.bottom > imageHeight)
-        {
+        if (rect.bottom > imageHeight) {
             rect.bottom = imageHeight;
             rect.top = imageHeight - getHeight();
         }
 
-        if (rect.top < 0)
-        {
+        if (rect.top < 0) {
             rect.top = 0;
             rect.bottom = getHeight();
         }
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event)
-    {
+    public boolean onTouchEvent(MotionEvent event) {
         mDetector.onToucEvent(event);
         return true;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Bitmap bitmap = mDecoder.decodeRegion(mRect, options);
+        Bitmap bm = mDecoder.decodeRegion(mRect, options);
+        canvas.drawBitmap(bm, 0, 0, null);
+    }
+
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        int width = getMeasuredWidth();
+        int height = getMeasuredHeight();
+
+        int imageWidth = mImageWidth;
+        int imageHeight = mImageHeight;
+
+        mRect.left = imageWidth / 2 - width / 2;
+        mRect.top = imageHeight / 2 - height / 2;
+        mRect.right = mRect.left + width;
+        mRect.bottom = mRect.top + height;
+
     }
 }

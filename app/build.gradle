@@ -4,7 +4,7 @@ apply plugin: 'com.bugtags.library.plugin'
 
 bugtags {
     appKey "96e6e8deacc61b49caf8500e5555af9b"
-    appSecret  "APP_SECRET"
+    appSecret  "5994f568f6de347c7baa8adcc5548d52"
 }
 
 android {
