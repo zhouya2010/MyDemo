@@ -18,59 +18,41 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Created by Administrator on 2016/8/16.
+ * Created by Administrator on 2016/8/17.
  */
 
-public class LargeImageView extends View implements GestureDetector.OnGestureListener {
+public class ScaleImageView extends View implements GestureDetector.OnGestureListener{
 
-    Rect rect;
+    /**按下时两指之间的距离**/
+    private float startDistance;
+    /** 两个手指的中间点 */
+    private PointF midPoint;
 
-    BitmapFactory.Options options;
-
-    BitmapRegionDecoder mDecoder;
-
-    GestureDetector gestureDetector;
-
-    Matrix matrix = new Matrix();
-
-    /**
-     * 图片的宽度和高度
-     */
+    /** 用于记录图片要进行拖拉时候的坐标位置 */
+    private Matrix currentMatrix = new Matrix();
+    private Matrix matrix = new Matrix();
     private int mImageWidth, mImageHeight;
+    private BitmapRegionDecoder mDecoder;
+    private int mode = 0;
 
-    public LargeImageView(Context context) {
+    private Rect rect;
+    private GestureDetector gestureDetector;
+
+    private BitmapFactory.Options options;
+
+    public ScaleImageView(Context context) {
         this(context, null);
     }
 
-    public LargeImageView(Context context, AttributeSet attrs) {
+    public ScaleImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public LargeImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ScaleImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-        int width = getMeasuredWidth();
-        int height = getMeasuredHeight();
-
-        rect.left = mImageWidth / 2 - width / 2;
-        rect.right = rect.left + width;
-        rect.top = mImageHeight / 2 - height / 2;
-        rect.bottom = rect.top + height;
-//        checkRect();
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        Bitmap bitmap = mDecoder.decodeRegion(rect, options);
-//        canvas.drawBitmap(bitmap,0,0,null);
-        canvas.drawBitmap(bitmap,matrix,null);
-    }
 
     public void setInputStream(InputStream is) {
         try {
@@ -104,11 +86,47 @@ public class LargeImageView extends View implements GestureDetector.OnGestureLis
         options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.RGB_565;
 
-        matrix.setScale(1.5f, 1.5f);// 缩小为原来的一半
+        matrix.setScale(1.0f, 1.0f);// 缩小为原来的一半
     }
 
     @Override
+    protected void onDraw(Canvas canvas) {
+        Bitmap bitmap = mDecoder.decodeRegion(rect, options);
+//        canvas.drawBitmap(bitmap,0,0,null);
+        canvas.drawBitmap(bitmap,matrix,null);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        int width = getMeasuredWidth();
+        int height = getMeasuredHeight();
+
+        if(mImageWidth > width) {
+            rect.left = mImageWidth / 2 - width / 2;
+            rect.right = rect.left + width;
+        }
+        else {
+            rect.left = 0;
+            rect.right = rect.left + width;
+        }
+
+        if (mImageHeight > height) {
+            rect.top = mImageHeight / 2 - height / 2;
+            rect.bottom = rect.top + height;
+        }
+       else {
+            rect.top = 0;
+            rect.bottom = rect.top + height;
+        }
+    }
+
+    private float[] values = new float[9];
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
+
         gestureDetector.onTouchEvent(event);
 
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
@@ -116,15 +134,49 @@ public class LargeImageView extends View implements GestureDetector.OnGestureLis
                 break;
             case MotionEvent.ACTION_POINTER_DOWN:
                 Log.e("LargeImageView", "ACTION_POINTER_DOWN");
+                startDistance = distance(event);
+                midPoint = mid(event);
+                currentMatrix.set(matrix);
+                mode = 1;
                 break;
             case MotionEvent.ACTION_POINTER_UP:
                 Log.e("LargeImageView", "ACTION_POINTER_UP");
+                mode = 0;
                 break;
             case MotionEvent.ACTION_MOVE:
-//                Log.e("LargeImageView", "ACTION_MOVE");
+                if (mode == 1) {
+                    float endDis = distance(event);// 结束距离
+                    if (endDis > 10f) { // 两个手指并拢在一起的时候像素大于10
+                        float scale = endDis / startDistance;// 得到缩放倍数
+                        Log.d("ScaleImageView", "scale:" + scale);
+                        matrix.set(currentMatrix);
+                        matrix.postScale(scale, scale,midPoint.x,midPoint.y);
+                        matrix.getValues(values);
+
+                        for (int i = 0; i < values.length; i++) {
+                            Log.d("ScaleImageView", "values[i]:" + values[i]);
+                        }
+                        invalidate();
+                    }
+                }
+
+                break;
         }
 
         return true;
+    }
+
+    private float distance(MotionEvent event) {
+        float x = event.getX(0)-event.getX(1);
+        float y = event.getY(0)-event.getY(1);
+        return (float)Math.sqrt(x*x+y*y);
+    }
+
+    /** 计算两个手指间的中间点 */
+    private PointF mid(MotionEvent event) {
+        float midX = (event.getX(1) + event.getX(0)) / 2;
+        float midY = (event.getY(1) + event.getY(0)) / 2;
+        return new PointF(midX, midY);
     }
 
     @Override
@@ -144,9 +196,11 @@ public class LargeImageView extends View implements GestureDetector.OnGestureLis
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+
         rect.offset((int)distanceX, (int)distanceY);
         checkRect();
         invalidate();
+
         return true;
     }
 
@@ -159,6 +213,7 @@ public class LargeImageView extends View implements GestureDetector.OnGestureLis
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         return false;
     }
+
 
     private void checkRect() {
 
@@ -182,18 +237,5 @@ public class LargeImageView extends View implements GestureDetector.OnGestureLis
             rect.top = rect.bottom - getHeight();
         }
 
-    }
-
-
-    private float spacing(MotionEvent event) {
-        float x = event.getX(0)-event.getX(1);
-        float y = event.getY(0)-event.getY(1);
-        return (float)Math.sqrt(x*x+y*y);
-    }
-
-    private void midPoint(PointF point, MotionEvent event) {
-        float x = event.getX(0) + event.getX(1);
-        float y = event.getY(0) + event.getY(1);
-        point.set(x / 2, y / 2);
     }
 }

@@ -3,10 +3,10 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <app.example.com.mydemo.bitmap.ScaleImageView
         android:id="@+id/id_largetImageview"
-        android:layout_width="200dp"
-        android:layout_height="200dp" />
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
 
     <app.example.com.mydemo.bitmap.LargeImageView
         android:id="@+id/id_my_largeimage"

@@ -18,7 +18,11 @@
     <string name="ipc_test">IPC Test</string>
     <string name="collapsing">collapsing</string>
     <string name="bitmap_load">图片加载</string>
+    <string name="rxjava">RxJava</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
+
+
+
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
