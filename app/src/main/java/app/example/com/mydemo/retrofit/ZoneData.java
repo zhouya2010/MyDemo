@@ -8,20 +8,26 @@ import java.util.List;
 
 public class ZoneData {
 
-    public int error;
-    public String msg;
-    public List<ZoneInfo> datas;
-
-
-    /**
-     * id : 26381
-     * zonename : zone_1
-     * num : 1
-     * status : 1
-     * image :
-     */
+    private int error;
+    private String msg;
 
     private List<DataBean> data;
+
+    public int getError() {
+        return error;
+    }
+
+    public void setError(int error) {
+        this.error = error;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public List<DataBean> getData() {
         return data;

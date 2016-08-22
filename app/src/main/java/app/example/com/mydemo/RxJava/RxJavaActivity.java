@@ -9,8 +9,13 @@ import org.xutils.view.annotation.ViewInject;
 
 import app.example.com.mydemo.BaseActivity;
 import app.example.com.mydemo.R;
+import app.example.com.mydemo.retrofit.HttpInterface;
+import app.example.com.mydemo.retrofit.ZoneData;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
-import rx.Subscriber;
+import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -29,6 +34,52 @@ public class RxJavaActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://45.33.46.130")
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+
+        HttpInterface httpInterface = retrofit.create(HttpInterface.class);
+
+//        httpInterface.getWeather("9df624ae12694cd8d76144eacdcddfa6")
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<WeatherData>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        textView.setText("onError");
+//                    }
+//
+//                    @Override
+//                    public void onNext(WeatherData weatherData) {
+//                        textView.setText(weatherData.toString());
+//                    }
+//                });
+
+        httpInterface.getZoneInfo2(5450)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ZoneData>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        textView.setText("onError=>" + e.toString());
+                    }
+
+                    @Override
+                    public void onNext(ZoneData zoneData) {
+                        textView.setText(""+zoneData.getError());
+                    }
+                });
+
         Observable.just(1, 2, 3, 4)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -38,15 +89,5 @@ public class RxJavaActivity extends BaseActivity {
                         Log.d("RxJavaActivity", "integer:" + integer);
                     }
                 });
-
-        Observable<String> observable = Observable.create(
-                new Observable.OnSubscribe<String>() {
-                    @Override
-                    public void call(Subscriber<? super String> subscriber) {
-                        subscriber.onNext("sss");
-                    }
-                }
-        );
-
     }
 }
