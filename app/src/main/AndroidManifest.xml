@@ -59,6 +59,7 @@
         <activity android:name=".bitmap.BitmapActivity"/>
         <activity android:name=".bitmap.LargeImageViewActivity"/>
         <activity android:name=".RxJava.RxJavaActivity"/>
+        <activity android:name=".retrofit.RetrofitActivity"/>
     </application>
 
 </manifest>

@@ -19,6 +19,7 @@
     <string name="collapsing">collapsing</string>
     <string name="bitmap_load">图片加载</string>
     <string name="rxjava">RxJava</string>
+    <string name="retrofix">retrofix</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
 
 

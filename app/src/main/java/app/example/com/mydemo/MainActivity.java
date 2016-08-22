@@ -26,6 +26,7 @@ import app.example.com.mydemo.download.DownLoadActivity;
 import app.example.com.mydemo.ipc.FirstActivity;
 import app.example.com.mydemo.mvp.NumActivity;
 import app.example.com.mydemo.myview.TouchEventActivity;
+import app.example.com.mydemo.retrofit.RetrofitActivity;
 import app.example.com.mydemo.video.VideoDemo;
 import app.example.com.mydemo.wifi.WifiSettings;
 
@@ -76,7 +77,8 @@ public class MainActivity extends BaseActivity {
 
 
     @Event(value = {R.id.contact_btn,R.id.my_view_btn,R.id.video_btn,R.id.data_base_btn, R.id.download_btn,
-            R.id.wifi_btn, R.id.mvc_test_btn, R.id.ipc_test_btn, R.id.collapsing_test_btn,R.id.bitmap_test_btn,R.id.rxjava_test_btn})
+            R.id.wifi_btn, R.id.mvc_test_btn, R.id.ipc_test_btn, R.id.collapsing_test_btn,R.id.bitmap_test_btn,
+            R.id.rxjava_test_btn, R.id.retrofit_test_btn})
     private void click(View v){
         Intent intent = null;
         switch (v.getId()) {
@@ -131,6 +133,11 @@ public class MainActivity extends BaseActivity {
             case R.id.rxjava_test_btn:
                 intent = new Intent(this, RxJavaActivity.class);
                 break;
+
+            case R.id.retrofit_test_btn:
+                intent = new Intent(this, RetrofitActivity.class);
+                break;
+
             default:
                 break;
         }
