@@ -1,5 +1,6 @@
 package app.example.com.mydemo.retrofit;
 
+import app.example.com.mydemo.RxJava.ConnectCloudBean;
 import app.example.com.mydemo.RxJava.WeatherData;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -12,6 +13,9 @@ import rx.Observable;
 
 public interface HttpInterface {
 
+    @GET("/api/rest/v2/device/conncloud")
+    Observable<ConnectCloudBean> getConnectCloud(@Query("dno") String dno);
+
     @GET("/api/rest/v2/device/getzone")
     Call<ZoneData> getZoneInfo(@Query("devid") int devid);
 
@@ -20,4 +24,5 @@ public interface HttpInterface {
 
     @GET("/api/rest/v2/device/getweatherbydevid")
     Observable<WeatherData> getWeather(@Query("cno") String cno);
+
 }

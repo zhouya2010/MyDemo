@@ -10,14 +10,14 @@ import org.xutils.view.annotation.ViewInject;
 import app.example.com.mydemo.BaseActivity;
 import app.example.com.mydemo.R;
 import app.example.com.mydemo.retrofit.HttpInterface;
-import app.example.com.mydemo.retrofit.ZoneData;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
-import rx.Observer;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -35,14 +35,46 @@ public class RxJavaActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         Retrofit retrofit = new Retrofit.Builder()
+                .client(new OkHttpClient())
                 .baseUrl("http://45.33.46.130")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
-        HttpInterface httpInterface = retrofit.create(HttpInterface.class);
+        final HttpInterface httpInterface = retrofit.create(HttpInterface.class);
+
+        httpInterface.getConnectCloud("325EA1B7CB96E9C2")
+              .flatMap(new Func1<ConnectCloudBean, Observable<WeatherData>>() {
+                  @Override
+                  public Observable<WeatherData> call(ConnectCloudBean connectCloudBean) {
+
+                      Log.d("RxJavaActivity", connectCloudBean.getData().getConnuid());
+
+                      return httpInterface.getWeather(connectCloudBean.getData().getConnuid());
+                  }
+              })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<WeatherData>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.d("RxJavaActivity", "onCompleted");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("RxJavaActivity", "onError:  " + e.toString());
+                    }
+
+                    @Override
+                    public void onNext(WeatherData weatherData) {
+                        Log.d("RxJavaActivity", "weatherData.getData().getWeather():" + weatherData.getData().getRegion());
+                        textView.setText(weatherData.getData().getRegion());
+                    }
+                });
 
 //        httpInterface.getWeather("9df624ae12694cd8d76144eacdcddfa6")
+//                .subscribeOn(Schedulers.io())
 //                .observeOn(AndroidSchedulers.mainThread())
 //                .subscribe(new Observer<WeatherData>() {
 //                    @Override
@@ -52,42 +84,45 @@ public class RxJavaActivity extends BaseActivity {
 //
 //                    @Override
 //                    public void onError(Throwable e) {
-//                        textView.setText("onError");
+//
 //                    }
 //
 //                    @Override
 //                    public void onNext(WeatherData weatherData) {
-//                        textView.setText(weatherData.toString());
+//                        Log.d("RxJavaActivity", "weatherData.getData().getWeather():" + weatherData.getData().getRegion());
 //                    }
 //                });
-
-        httpInterface.getZoneInfo2(5450)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ZoneData>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        textView.setText("onError=>" + e.toString());
-                    }
-
-                    @Override
-                    public void onNext(ZoneData zoneData) {
-                        textView.setText(""+zoneData.getError());
-                    }
-                });
-
-        Observable.just(1, 2, 3, 4)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Integer>() {
-                    @Override
-                    public void call(Integer integer) {
-                        Log.d("RxJavaActivity", "integer:" + integer);
-                    }
-                });
+//
+//        httpInterface.getZoneInfo2(5450)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<ZoneData>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        Log.d("RxJavaActivity", "e:" + e.toString());
+////                        textView.setText("onError=>" + e.toString());
+//                    }
+//
+//                    @Override
+//                    public void onNext(ZoneData zoneData) {
+//                        Log.d("RxJavaActivity", "zoneData.getError():" + zoneData.getError());
+//                        textView.setText(""+zoneData.getData().size());
+//                    }
+//                });
+//
+//        Observable.just(1, 2, 3, 4)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Action1<Integer>() {
+//                    @Override
+//                    public void call(Integer integer) {
+//                        Log.d("RxJavaActivity", "integer:" + integer);
+//                    }
+//                });
     }
 }
