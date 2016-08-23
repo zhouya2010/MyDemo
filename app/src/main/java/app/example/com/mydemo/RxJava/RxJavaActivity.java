@@ -18,6 +18,7 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
+import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 /**
@@ -73,56 +74,29 @@ public class RxJavaActivity extends BaseActivity {
                     }
                 });
 
-//        httpInterface.getWeather("9df624ae12694cd8d76144eacdcddfa6")
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Observer<WeatherData>() {
-//                    @Override
-//                    public void onCompleted() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(WeatherData weatherData) {
-//                        Log.d("RxJavaActivity", "weatherData.getData().getWeather():" + weatherData.getData().getRegion());
-//                    }
-//                });
-//
-//        httpInterface.getZoneInfo2(5450)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<ZoneData>() {
-//                    @Override
-//                    public void onCompleted() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        Log.d("RxJavaActivity", "e:" + e.toString());
-////                        textView.setText("onError=>" + e.toString());
-//                    }
-//
-//                    @Override
-//                    public void onNext(ZoneData zoneData) {
-//                        Log.d("RxJavaActivity", "zoneData.getError():" + zoneData.getError());
-//                        textView.setText(""+zoneData.getData().size());
-//                    }
-//                });
-//
-//        Observable.just(1, 2, 3, 4)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Action1<Integer>() {
-//                    @Override
-//                    public void call(Integer integer) {
-//                        Log.d("RxJavaActivity", "integer:" + integer);
-//                    }
-//                });
+        Observable<Integer> observable1 = Observable.just(10,20,30);
+        Observable<Integer> observable2 = Observable.just(4, 8, 12, 16);
+        Observable.zip(observable1, observable2, new Func2<Integer, Integer, Integer>() {
+            @Override
+            public Integer call(Integer integer, Integer integer2) {
+                return integer + integer2;
+            }
+        }).subscribe(new Subscriber<Integer>() {
+            @Override
+            public void onCompleted() {
+                System.out.println("Sequence complete.");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                System.err.println("Error: " + e.getMessage());
+            }
+
+            @Override
+            public void onNext(Integer value) {
+                Log.d("RxJavaActivity", "Next:" + value);
+            }
+        });
+
     }
 }
