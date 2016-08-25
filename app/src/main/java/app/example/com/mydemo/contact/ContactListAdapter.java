@@ -2,10 +2,13 @@ package app.example.com.mydemo.contact;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -71,7 +74,7 @@ public class ContactListAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.contact_list_item, null);
@@ -80,7 +83,10 @@ public class ContactListAdapter extends BaseAdapter {
 					.findViewById(R.id.qcb);
 			holder.alpha = (TextView) convertView.findViewById(R.id.alpha);
 			holder.name = (TextView) convertView.findViewById(R.id.name);
+
 //			holder.number = (TextView) convertView.findViewById(R.id.number);
+			holder.isSelect = (CheckBox) convertView.findViewById(R.id.contact_select_checkbox);
+
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -116,6 +122,13 @@ public class ContactListAdapter extends BaseAdapter {
 		} else {
 			holder.alpha.setVisibility(View.GONE);
 		}
+
+		holder.isSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				Log.d("ContactListAdapter", "isChecked:" + isChecked + "  position: "+position);
+			}
+		});
 		return convertView;
 	}
 
@@ -124,6 +137,7 @@ public class ContactListAdapter extends BaseAdapter {
 		TextView alpha;
 		TextView name;
 		TextView number;
+		CheckBox isSelect;
 	}
 
 	/**
