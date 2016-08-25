@@ -18,12 +18,7 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
-import rx.functions.Func2;
 import rx.schedulers.Schedulers;
-
-/**
- * Created by Administrator on 2016/8/18.
- */
 
 @ContentView(R.layout.activity_rxjava)
 public class RxJavaActivity extends BaseActivity {
@@ -50,53 +45,33 @@ public class RxJavaActivity extends BaseActivity {
                   public Observable<WeatherData> call(ConnectCloudBean connectCloudBean) {
 
                       Log.d("RxJavaActivity", connectCloudBean.getData().getConnuid());
-
                       return httpInterface.getWeather(connectCloudBean.getData().getConnuid());
                   }
               })
+                .flatMap(new Func1<WeatherData, Observable<WeatherData.DataBean.WeatherBean>>() {
+                    @Override
+                    public Observable<WeatherData.DataBean.WeatherBean> call(WeatherData weatherData) {
+                        return Observable.from(weatherData.getData().getWeather());
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<WeatherData>() {
+                .subscribe(new Subscriber<WeatherData.DataBean.WeatherBean>() {
                     @Override
                     public void onCompleted() {
-                        Log.d("RxJavaActivity", "onCompleted");
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("RxJavaActivity", "onError:  " + e.toString());
+
                     }
 
                     @Override
-                    public void onNext(WeatherData weatherData) {
-                        Log.d("RxJavaActivity", "weatherData.getData().getWeather():" + weatherData.getData().getRegion());
-                        textView.setText(weatherData.getData().getRegion());
+                    public void onNext(WeatherData.DataBean.WeatherBean weatherBean) {
+                        Log.d("RxJavaActivity", weatherBean.toString());
                     }
                 });
-
-        Observable<Integer> observable1 = Observable.just(10,20,30);
-        Observable<Integer> observable2 = Observable.just(4, 8, 12, 16);
-        Observable.zip(observable1, observable2, new Func2<Integer, Integer, Integer>() {
-            @Override
-            public Integer call(Integer integer, Integer integer2) {
-                return integer + integer2;
-            }
-        }).subscribe(new Subscriber<Integer>() {
-            @Override
-            public void onCompleted() {
-                System.out.println("Sequence complete.");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                System.err.println("Error: " + e.getMessage());
-            }
-
-            @Override
-            public void onNext(Integer value) {
-                Log.d("RxJavaActivity", "Next:" + value);
-            }
-        });
 
     }
 }

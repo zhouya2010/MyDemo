@@ -188,6 +188,23 @@ public class WeatherData {
             public void setTag(String tag) {
                 this.tag = tag;
             }
+
+            @Override
+            public String toString() {
+                return "WeatherBean{" +
+                        "descript='" + descript + '\'' +
+                        ", humidity='" + humidity + '\'' +
+                        ", aveTemp='" + aveTemp + '\'' +
+                        ", minTemp='" + minTemp + '\'' +
+                        ", maxTemp='" + maxTemp + '\'' +
+                        ", rainProbability='" + rainProbability + '\'' +
+                        ", day='" + day + '\'' +
+                        ", sunrise='" + sunrise + '\'' +
+                        ", sunset='" + sunset + '\'' +
+                        ", finetune='" + finetune + '\'' +
+                        ", tag='" + tag + '\'' +
+                        '}';
+            }
         }
     }
 }
