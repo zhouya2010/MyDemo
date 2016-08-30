@@ -96,6 +96,7 @@ public class MainActivity extends BaseActivity {
                 Toast.makeText(this, "my_view", Toast.LENGTH_SHORT).show();
                 intent = new Intent(this, TouchEventActivity.class);
 //                intent = new Intent(this, MyViewActivity.class);
+
                 break;
 
             case R.id.data_base_btn:
