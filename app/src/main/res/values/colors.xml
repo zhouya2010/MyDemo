@@ -382,4 +382,5 @@
     <color name="settings_menu_bg">#15ffffff</color>
     <color name="dark_green">#31c27c</color>
 
+    <color name="nev_item">#ffffffff</color>
 </resources>

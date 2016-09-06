@@ -1,5 +1,6 @@
 package app.example.com.mydemo.RxJava;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -72,6 +73,58 @@ public class RxJavaActivity extends BaseActivity {
                         Log.d("RxJavaActivity", weatherBean.toString());
                     }
                 });
+    }
+
+    public class NetOperator {
+
+        public void operator(){
+            try {
+                //休眠1秒
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
 
     }
+
+    public class ProgressBarAsyncTask extends AsyncTask<Integer, Integer, String> {
+
+        private TextView textView;
+
+        public ProgressBarAsyncTask (TextView textView) {
+            super();
+            this.textView = textView;
+        }
+
+        @Override
+        protected String doInBackground(Integer... params) {
+
+            NetOperator netOperator = new NetOperator();
+            int i = 0;
+            for (i = 10; i <= 100; i+=10) {
+                netOperator.operator();
+                publishProgress(i);
+            }
+            return i + params[0].intValue() + "";
+        }
+
+        @Override
+        protected void onPreExecute() {
+            textView.setText("开始执行异步线程");
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            textView.setText("异步操作执行结束" + s);
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            textView.setText("异步操作执行..." + values);
+        }
+    }
+
+
 }

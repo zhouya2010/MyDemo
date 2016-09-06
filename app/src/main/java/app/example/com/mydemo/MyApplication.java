@@ -23,9 +23,20 @@ public class MyApplication extends Application{
     private static DaoMaster daoMaster;
     private static DaoSession daoSession;
 
+    public static MyApplication myApplication;
+
+    public static Application getContext() {
+
+        return myApplication;
+
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+
+        myApplication = this;
+
         x.Ext.init(this);
         x.Ext.setDebug(BuildConfig.DEBUG);
 

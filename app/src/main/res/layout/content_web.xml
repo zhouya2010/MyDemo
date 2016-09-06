@@ -5,15 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="app.example.com.mydemo.CollapsingToolbar.ScrollingActivity"
-    tools:showIn="@layout/activity_scrolling">
+    tools:context="app.example.com.mydemo.webpage.WebActivity"
+    tools:showIn="@layout/activity_web">
 
-    <WebView
-        android:id="@+id/wv_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text"
-        android:background="@color/nev_item"/>
+        android:text="@string/large_text" />
 
 </android.support.v4.widget.NestedScrollView>
