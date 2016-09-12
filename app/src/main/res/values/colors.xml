@@ -383,4 +383,8 @@
     <color name="dark_green">#31c27c</color>
 
     <color name="nev_item">#ffffffff</color>
+    <color name="color1">#B07ECBDA</color>
+    <color name="color2">#B0E6A92C</color>
+    <color name="color3">#B0D6014D</color>
+    <color name="color4">#B05ABA94</color>
 </resources>

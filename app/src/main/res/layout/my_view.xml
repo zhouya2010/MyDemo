@@ -22,4 +22,9 @@
         app:textSize="16sp"
         app:lineColor="@color/blue"/>
 
+    <app.example.com.mydemo.myview.MySlackLoadingView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/arc_view"/>
+
 </RelativeLayout>
