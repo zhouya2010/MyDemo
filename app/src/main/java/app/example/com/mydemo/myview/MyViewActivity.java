@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,9 @@ public class MyViewActivity extends BaseActivity {
     public static List<Integer> sizes = new ArrayList<>();
     private Button btn;
 
+    @ViewInject(R.id.rl)
+    private RelativeLayout rl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,27 +41,15 @@ public class MyViewActivity extends BaseActivity {
         MyWaveView waveView = (MyWaveView) findViewById(R.id.wave_view);
         waveView.setInterpolator(new AccelerateInterpolator());
         waveView.run();
+
+        ImageView imageView = new ImageView(this);
+        imageView.setImageResource(R.drawable.coin);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100,100);
+        rl.addView(imageView, params);
+
+        imageView.setTranslationX(500);
+        imageView.setTranslationY(500);
+
     }
 
-//    private void initview() {
-//        view = (MyQQHealthView) findViewById(R.id.myQQView);
-//        view.setMySize(2345);
-//        view.setRank(11);
-//        view.setAverageSize(5436);
-//        sizes.add(1234);
-//        sizes.add(2234);
-//        sizes.add(4234);
-//        sizes.add(6234);
-//        sizes.add(3834);
-//        sizes.add(7234);
-//        sizes.add(5436);
-//        btn = (Button) findViewById(R.id.set_btn);
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                view.reSet(6534, 8, 4567);
-//                Toast.makeText(MyViewActivity.this, "click", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
 }

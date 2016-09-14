@@ -330,4 +330,15 @@ public class MySlackLoadingView extends View {
         mAnimList.add(lineWidthAnim);
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        Log.d("MySlackLoadingView", "onDetachedFromWindow");
+        if (mStatus == STATUS_LOADING) {
+            mStatus = STATUS_STILL;
+            for (Animator anim : mAnimList) {
+                anim.cancel();
+            }
+        }
+    }
 }
