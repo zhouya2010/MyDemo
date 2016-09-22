@@ -9,6 +9,7 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -37,7 +38,6 @@ public class SecondActivity extends BaseActivity {
 
     @ViewInject(R.id.edit_id)
     private EditText editId;
-
 
     private ServiceConnection connection = new ServiceConnection() {
         @Override
@@ -75,7 +75,6 @@ public class SecondActivity extends BaseActivity {
         bindService(new Intent(this,SecondService.class), connection, BIND_AUTO_CREATE);
     }
 
-
     public void onClick(View view) throws  RemoteException{
         switch (view.getId()) {
             case R.id.btn_add:
@@ -93,13 +92,13 @@ public class SecondActivity extends BaseActivity {
                 break;
             case R.id.btn_delete:
                 Log.d("SecondActivity", "delete");
+                iStu.delete(Integer.parseInt(editId.getText().toString()));
                 break;
             case R.id.btn_query:
                 Log.d("SecondActivity", "query");
                 List<Stu> stus = iStu.query();
-                if(stus.size() > 0) {
-                    Log.d("SecondActivity", stus.get(stus.size() - 1).getName());
-                    Log.d("SecondActivity", stus.get(stus.size() - 1).getSex());
+                for(Stu stu1 : stus) {
+                    Log.d("SecondActivity", stu1.toString());
                 }
                 break;
         }

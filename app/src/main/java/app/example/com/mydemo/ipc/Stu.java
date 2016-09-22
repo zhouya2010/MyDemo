@@ -79,4 +79,14 @@ public class Stu implements Parcelable {
             return new Stu[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "Stu{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", sex='" + sex + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }
