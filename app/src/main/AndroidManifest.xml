@@ -42,6 +42,7 @@
         <activity android:name=".mvc.CountActivity" />
         <activity android:name=".mvp.NumActivity" />
         <activity android:name=".ipc.FirstActivity" />
+        <activity android:name=".ipc.SecondActivity"/>
         <activity android:name=".myview.TouchEventActivity" />
 
         <service
@@ -59,6 +60,12 @@
         <activity android:name=".bitmap.LargeImageViewActivity" />
         <activity android:name=".RxJava.RxJavaActivity" />
         <activity android:name=".retrofit.RetrofitActivity" />
+
+        <service
+            android:name=".ipc.SecondService"
+            android:process=":SecondService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

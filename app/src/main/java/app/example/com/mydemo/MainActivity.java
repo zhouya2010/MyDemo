@@ -24,6 +24,7 @@ import app.example.com.mydemo.contact.ContactListActivity;
 import app.example.com.mydemo.database.SprayActivity;
 import app.example.com.mydemo.download.DownLoadActivity;
 import app.example.com.mydemo.ipc.FirstActivity;
+import app.example.com.mydemo.ipc.SecondActivity;
 import app.example.com.mydemo.mvp.NumActivity;
 import app.example.com.mydemo.myview.MyViewActivity;
 import app.example.com.mydemo.retrofit.RetrofitActivity;
@@ -119,7 +120,7 @@ public class MainActivity extends BaseActivity {
                 break;
 
             case R.id.ipc_test_btn:
-                intent = new Intent(this, FirstActivity.class);
+                intent = new Intent(this, SecondActivity.class);
                 break;
 
             case R.id.collapsing_test_btn:
