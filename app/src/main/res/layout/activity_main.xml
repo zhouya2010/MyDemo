@@ -71,6 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/wifi_btn"
+                android:drawableEnd="@drawable/ic_my_next"
                 android:text="@string/mvc_test"/>
 
             <Button

@@ -146,6 +146,9 @@ public class MainActivity extends BaseActivity {
 
         if (intent != null){
             startActivity(intent);
+//            this.finish();
+            overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+//            overridePendingTransition(R.anim.activity_right_in, android.R.anim.slide_out_right);
         }
 
     }
