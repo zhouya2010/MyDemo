@@ -79,7 +79,7 @@ public class MainActivity extends BaseActivity {
 
     @Event(value = {R.id.contact_btn,R.id.my_view_btn,R.id.video_btn,R.id.data_base_btn, R.id.download_btn,
             R.id.wifi_btn, R.id.mvc_test_btn, R.id.ipc_test_btn, R.id.collapsing_test_btn,R.id.bitmap_test_btn,
-            R.id.rxjava_test_btn, R.id.retrofit_test_btn})
+            R.id.rxjava_test_btn, R.id.retrofit_test_btn, R.id.map_btn})
     private void click(View v){
         Intent intent = null;
         switch (v.getId()) {
@@ -138,6 +138,9 @@ public class MainActivity extends BaseActivity {
 
             case R.id.retrofit_test_btn:
                 intent = new Intent(this, RetrofitActivity.class);
+                break;
+
+            case R.id.map_btn:
                 break;
 
             default:

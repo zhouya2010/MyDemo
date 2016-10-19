@@ -1,6 +1,7 @@
 package app.example.com.mydemo.retrofit;
 
 import android.os.Bundle;
+import android.support.annotation.MainThread;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -15,6 +16,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2016/8/22.
@@ -55,6 +59,42 @@ public class RetrofitActivity extends BaseActivity {
                textView.setText("onFailure");
            }
        });
+
+        SearchStakeRequest searchStakeRequest = new SearchStakeRequest();
+        searchStakeRequest.setFirst(20);
+        searchStakeRequest.setCount(10000);
+        searchStakeRequest.setDistance("10000000");
+        searchStakeRequest.setKeyword("");
+        searchStakeRequest.setLatitude(32.048057);
+        searchStakeRequest.setLongitude(118.790692);
+
+
+        ApiManage.getInstence().getStakeApiService().searchStakeByName(searchStakeRequest)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<AllStakeResponse>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.e("RetrofitActivity", "onCompleted");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("RetrofitActivity", "onError");
+                    }
+
+                    @Override
+                    public void onNext(AllStakeResponse allStakeResponse) {
+
+                        Log.d("RetrofitActivity", "allStakeResponse.getResultObject().size():" + allStakeResponse.getResultObject().size());
+                        for (AllStakeResponse.ResultObjectEntity rs : allStakeResponse.getResultObject()) {
+                            Log.e("RetrofitActivity", rs.toString());
+
+                        }
+
+
+                    }
+                });
 
     }
 
