@@ -51,9 +51,7 @@ public class ApiManage {
             .build();
     public ZhihuApi zhihuApi;
     private Object zhihuMonitor = new Object();
-
-    public StakeApi stakeApi;
-    private Object stakeMonitor = new Object();
+    
 
     public static ApiManage getInstence() {
         if (apiManage == null) {
@@ -83,21 +81,6 @@ public class ApiManage {
         return zhihuApi;
     }
 
-    public StakeApi getStakeApiService() {
-        if (stakeApi ==  null) {
-            synchronized (stakeMonitor) {
-                if (stakeApi == null) {
-                    stakeApi = new Retrofit.Builder()
-                            .baseUrl("http://114.55.245.53:8080")
-                            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                            .client(client)
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build().create(StakeApi.class);
-                }
-            }
-        }
 
-        return  stakeApi;
-    }
 
 }

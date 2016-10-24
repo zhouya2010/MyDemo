@@ -60,41 +60,7 @@ public class RetrofitActivity extends BaseActivity {
            }
        });
 
-        SearchStakeRequest searchStakeRequest = new SearchStakeRequest();
-        searchStakeRequest.setFirst(20);
-        searchStakeRequest.setCount(10000);
-        searchStakeRequest.setDistance("10000000");
-        searchStakeRequest.setKeyword("");
-        searchStakeRequest.setLatitude(32.048057);
-        searchStakeRequest.setLongitude(118.790692);
 
-
-        ApiManage.getInstence().getStakeApiService().searchStakeByName(searchStakeRequest)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<AllStakeResponse>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.e("RetrofitActivity", "onCompleted");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e("RetrofitActivity", "onError");
-                    }
-
-                    @Override
-                    public void onNext(AllStakeResponse allStakeResponse) {
-
-                        Log.d("RetrofitActivity", "allStakeResponse.getResultObject().size():" + allStakeResponse.getResultObject().size());
-                        for (AllStakeResponse.ResultObjectEntity rs : allStakeResponse.getResultObject()) {
-                            Log.e("RetrofitActivity", rs.toString());
-
-                        }
-
-
-                    }
-                });
 
     }
 
