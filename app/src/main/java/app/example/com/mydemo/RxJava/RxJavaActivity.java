@@ -10,6 +10,7 @@ import org.xutils.view.annotation.ViewInject;
 
 import app.example.com.mydemo.BaseActivity;
 import app.example.com.mydemo.R;
+import app.example.com.mydemo.dagger.AppComponent;
 import app.example.com.mydemo.retrofit.HttpInterface;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -73,6 +74,8 @@ public class RxJavaActivity extends BaseActivity {
                         Log.d("RxJavaActivity", weatherBean.toString());
                     }
                 });
+
+
     }
 
     public class NetOperator {

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.bugtags.library.plugin'
 apply plugin: 'android-apt'
+apply plugin: 'com.neenbedankt.android-apt'
 
 bugtags {
     appKey "96e6e8deacc61b49caf8500e5555af9b"
@@ -8,8 +9,8 @@ bugtags {
 }
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 25
+    buildToolsVersion '24.0.3'
 
     defaultConfig {
         applicationId "app.example.com.mydemo"
@@ -44,9 +45,9 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
-    compile 'com.android.support:cardview-v7:23.4.0'
+    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.android.support:design:25.0.0'
+    compile 'com.android.support:cardview-v7:25.0.0'
     compile 'org.xutils:xutils:3.3.22'
     compile 'de.greenrobot:greendao:2.1.0'
     compile 'com.github.yuweiguocn:GreenDaoUpgradeHelper:v0.0.5'
@@ -91,6 +92,9 @@ dependencies {
 
     compile 'com.jakewharton:butterknife:8.2.1'
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
+    compile 'com.google.dagger:dagger:2.0.2'
+    compile 'com.google.dagger:dagger-compiler:2.0.2'
+    compile 'org.glassfish:javax.annotation:10.0-b28'// 添加java 注解库
 
     compile 'com.squareup.picasso:picasso:2.5.2'
 }

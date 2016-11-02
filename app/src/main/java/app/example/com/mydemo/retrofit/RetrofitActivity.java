@@ -10,6 +10,11 @@ import org.xutils.view.annotation.ViewInject;
 
 import app.example.com.mydemo.BaseActivity;
 import app.example.com.mydemo.R;
+import app.example.com.mydemo.dagger.ActivityMoudule;
+import app.example.com.mydemo.dagger.AppComponent;
+import app.example.com.mydemo.dagger.AppModule;
+import app.example.com.mydemo.dagger.DaggerActivityComponent;
+import app.example.com.mydemo.dagger.DaggerAppComponent;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,7 +65,8 @@ public class RetrofitActivity extends BaseActivity {
            }
        });
 
-
+        AppComponent con = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
+        DaggerActivityComponent.builder().appComponent(con).activityMoudule(new ActivityMoudule()).build().inject(this);
 
     }
 
