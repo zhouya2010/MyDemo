@@ -8,6 +8,8 @@ import android.widget.TextView;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
+import java.util.concurrent.TimeUnit;
+
 import app.example.com.mydemo.BaseActivity;
 import app.example.com.mydemo.R;
 import app.example.com.mydemo.dagger.AppComponent;
@@ -18,6 +20,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -28,54 +31,90 @@ public class RxJavaActivity extends BaseActivity {
     @ViewInject(R.id.rxjava_text)
     private TextView textView;
 
+    Subscription subscription ;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.e("RxJavaActivity", "test");
+
         Retrofit retrofit = new Retrofit.Builder()
                 .client(new OkHttpClient())
-                .baseUrl("http://45.33.46.130")
+                .baseUrl("http://www.rainconn.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
         final HttpInterface httpInterface = retrofit.create(HttpInterface.class);
 
-        httpInterface.getConnectCloud("325EA1B7CB96E9C2")
-              .flatMap(new Func1<ConnectCloudBean, Observable<WeatherData>>() {
-                  @Override
-                  public Observable<WeatherData> call(ConnectCloudBean connectCloudBean) {
+        subscription = Observable.interval(2, TimeUnit.SECONDS).flatMap(new Func1<Long, Observable<ConnectCloudBean>>() {
+            @Override
+            public Observable<ConnectCloudBean> call(Long aLong) {
+                return httpInterface.getConnectCloud("ACCF236FB0EA");
+            }
+        }).subscribe(new Subscriber<ConnectCloudBean>() {
+            @Override
+            public void onCompleted() {
 
-                      Log.d("RxJavaActivity", connectCloudBean.getData().getConnuid());
-                      return httpInterface.getWeather(connectCloudBean.getData().getConnuid());
-                  }
-              })
-                .flatMap(new Func1<WeatherData, Observable<WeatherData.DataBean.WeatherBean>>() {
-                    @Override
-                    public Observable<WeatherData.DataBean.WeatherBean> call(WeatherData weatherData) {
-                        return Observable.from(weatherData.getData().getWeather());
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<WeatherData.DataBean.WeatherBean>() {
-                    @Override
-                    public void onCompleted() {
+            }
 
-                    }
+            @Override
+            public void onError(Throwable e) {
+                Log.d("RxJavaActivity", "onError");
+            }
 
-                    @Override
-                    public void onError(Throwable e) {
+            @Override
+            public void onNext(ConnectCloudBean connectCloudBean) {
+                Log.d("RxJavaActivity", connectCloudBean.getData().getConnuid());
+            }
+        });
 
-                    }
+//        httpInterface.getConnectCloud("325EA1B7CB96E9C2")
+//              .flatMap(new Func1<ConnectCloudBean, Observable<WeatherData>>() {
+//                  @Override
+//                  public Observable<WeatherData> call(ConnectCloudBean connectCloudBean) {
+//
+//                      Log.d("RxJavaActivity", connectCloudBean.getData().getConnuid());
+//                      return httpInterface.getWeather(connectCloudBean.getData().getConnuid());
+//                  }
+//              })
+//                .flatMap(new Func1<WeatherData, Observable<WeatherData.DataBean.WeatherBean>>() {
+//                    @Override
+//                    public Observable<WeatherData.DataBean.WeatherBean> call(WeatherData weatherData) {
+//                        return Observable.from(weatherData.getData().getWeather());
+//                    }
+//                })
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<WeatherData.DataBean.WeatherBean>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(WeatherData.DataBean.WeatherBean weatherBean) {
+//                        Log.d("RxJavaActivity", weatherBean.toString());
+//                    }
+//                });
 
-                    @Override
-                    public void onNext(WeatherData.DataBean.WeatherBean weatherBean) {
-                        Log.d("RxJavaActivity", weatherBean.toString());
-                    }
-                });
 
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("RxJavaActivity", "subscription.isUnsubscribed():" + subscription.isUnsubscribed());
+        if ( subscription != null  && !subscription.isUnsubscribed()){
+            subscription.unsubscribe();
+        }
     }
 
     public class NetOperator {

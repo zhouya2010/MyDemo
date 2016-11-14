@@ -13,7 +13,7 @@ import rx.Observable;
 
 public interface HttpInterface {
 
-    @GET("/api/rest/v2/device/conncloud")
+    @GET("/api/rest/d/conncloud")
     Observable<ConnectCloudBean> getConnectCloud(@Query("dno") String dno);
 
     @GET("/api/rest/v2/device/getzone")

@@ -17,16 +17,11 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
-import javax.inject.Inject;
 
 import app.example.com.mydemo.CollapsingToolbar.ScrollingActivity;
 import app.example.com.mydemo.RxJava.RxJavaActivity;
 import app.example.com.mydemo.bitmap.LargeImageViewActivity;
 import app.example.com.mydemo.contact.ContactListActivity;
-import app.example.com.mydemo.dagger.DaggerMainComponent;
-import app.example.com.mydemo.dagger.MainComponent;
-import app.example.com.mydemo.dagger.MainModule;
-import app.example.com.mydemo.dagger.Person;
 import app.example.com.mydemo.database.SprayActivity;
 import app.example.com.mydemo.download.DownLoadActivity;
 import app.example.com.mydemo.ipc.SecondActivity;
@@ -70,7 +65,7 @@ public class MainActivity extends BaseActivity {
         user.setEmail("ya.zhou@nxeco.com");// 设置邮箱
         user.signUpInBackground(new SignUpCallback() {
             @Override
-            public void done(AVException e) {
+        public void done(AVException e) {
                 if (e == null) {
                     // 注册成功
                     Log.d(TAG, "done: 注册成功");

@@ -10,12 +10,21 @@ import android.util.Log;
 public class Person {
 
     private Context mContext;
+    private String sex;
+
+    public Person() {
+        sex = "无";
+    }
 
     public Person(Context context){
         Log.i("dagger","person create!!!");
     }
 
+    public Person(String sex) {
+        this.sex = sex;
+    }
+
     public void show() {
-        Log.d("Person", "this is person show");
+        Log.d("Person", "this is person show "  + sex);
     }
 }

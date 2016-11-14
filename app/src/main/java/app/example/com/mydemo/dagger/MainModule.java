@@ -2,6 +2,7 @@ package app.example.com.mydemo.dagger;
 
 import android.content.Context;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -26,10 +27,22 @@ public class MainModule {
         return mContext;
     }
 
-    @Singleton
     @Provides
+    @Named("context")
     Person providerPerson(Context context){
         //提供Person对象
         return new Person(context);
+    }
+
+    @Provides
+    @Named("male")
+    Person providerPersonMale() {
+        return new Person("male");
+    }
+
+    @Provides
+    @Named("female")
+    Person providerPersonFemale() {
+        return new Person("female");
     }
 }

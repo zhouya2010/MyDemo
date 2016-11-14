@@ -8,13 +8,14 @@ import android.widget.TextView;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import app.example.com.mydemo.BaseActivity;
 import app.example.com.mydemo.R;
-import app.example.com.mydemo.dagger.ActivityMoudule;
-import app.example.com.mydemo.dagger.AppComponent;
-import app.example.com.mydemo.dagger.AppModule;
-import app.example.com.mydemo.dagger.DaggerActivityComponent;
-import app.example.com.mydemo.dagger.DaggerAppComponent;
+import app.example.com.mydemo.dagger.DaggerRetrofitActivityComponent;
+import app.example.com.mydemo.dagger.MainModule;
+import app.example.com.mydemo.dagger.Person;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,6 +35,12 @@ public class RetrofitActivity extends BaseActivity {
 
     @ViewInject(R.id.retrofit_text)
     TextView textView;
+
+
+
+    @Inject
+    @Named("male")
+    Person person;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +72,9 @@ public class RetrofitActivity extends BaseActivity {
            }
        });
 
-        AppComponent con = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
-        DaggerActivityComponent.builder().appComponent(con).activityMoudule(new ActivityMoudule()).build().inject(this);
+       DaggerRetrofitActivityComponent.builder().mainModule(new MainModule(this)).build().inject(this);
 
+        person.show();
     }
 
 
