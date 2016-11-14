@@ -59,6 +59,8 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         AVAnalytics.trackAppOpened(getIntent());
 
+        Log.d(TAG, "This is dev branch");
+
         AVUser user = new AVUser();// 新建 AVUser 对象实例
         user.setUsername("zhouya");// 设置用户名
         user.setPassword("123456");// 设置密码
