@@ -33,6 +33,7 @@ public class DownloadManager {
         return currentTaskList;
     }
 
+    private static final String test4 = "44";
     private Map<String,DownloadTask> currentTaskList = new HashMap<>();
     public void init(){
         executorService = Executors.newFixedThreadPool(mPoolSize);
