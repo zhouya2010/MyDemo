@@ -18,6 +18,7 @@ import java.util.concurrent.Future;
 import okhttp3.OkHttpClient;
 
 public class DownloadManager {
+    private static final String test = "1";
     private static final String TAG = "DownloadManager";
     private Context context;
     private static DownloadManager downloadManager;
