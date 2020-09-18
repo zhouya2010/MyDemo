@@ -23,6 +23,7 @@ public class DownloadManager {
     private Context context;
     private static DownloadManager downloadManager;
     private static DownloadDao downloadDao;
+    private static final String test2 = "22";
     private int mPoolSize = 5;
     private ExecutorService executorService;
     private Map<String,Future> futureMap;
