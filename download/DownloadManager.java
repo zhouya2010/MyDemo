@@ -33,7 +33,7 @@ public class DownloadManager {
     private static final String test = "1";
     private static final String tes2t = "2";
     private static final String test3 = "3";
-    private static final String test4 = "4";
+    private static final String test4 = "5";
     public Map<String, DownloadTask> getCurrentTaskList() {
         return currentTaskList;
     }
