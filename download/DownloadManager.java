@@ -32,6 +32,7 @@ public class DownloadManager {
     private OkHttpClient client;
     private static final String test = "1";
     private static final String tes2t = "2";
+    private static final String test3 = "3";
     public Map<String, DownloadTask> getCurrentTaskList() {
         return currentTaskList;
     }
