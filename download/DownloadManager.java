@@ -31,6 +31,7 @@ public class DownloadManager {
     private Map<String,Future> futureMap;
     private OkHttpClient client;
     private static final String test = "1";
+    private static final String tes2t = "2";
     public Map<String, DownloadTask> getCurrentTaskList() {
         return currentTaskList;
     }
