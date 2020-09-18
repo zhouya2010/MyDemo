@@ -30,7 +30,7 @@ public class DownloadManager {
     private ExecutorService executorService;
     private Map<String,Future> futureMap;
     private OkHttpClient client;
-
+    private static final String test = "1";
     public Map<String, DownloadTask> getCurrentTaskList() {
         return currentTaskList;
     }
