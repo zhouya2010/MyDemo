@@ -18,6 +18,7 @@ import java.util.concurrent.Future;
 import okhttp3.OkHttpClient;
 
 public class DownloadManager {
+    private static final String test1 = "11";
     private static final String TAG = "DownloadManager";
     private Context context;
     private static DownloadManager downloadManager;
@@ -26,6 +27,7 @@ public class DownloadManager {
     private ExecutorService executorService;
     private Map<String,Future> futureMap;
     private OkHttpClient client;
+    private static final String test3 = "33";
     public Map<String, DownloadTask> getCurrentTaskList() {
         return currentTaskList;
     }
